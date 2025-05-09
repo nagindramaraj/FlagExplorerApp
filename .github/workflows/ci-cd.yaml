@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [main]  # Change to 'master' if your branch is named 'master'
+    branches: [main]
 
 jobs:
   build:
@@ -10,8 +10,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -42,10 +40,10 @@ jobs:
       run: |
         cd frontend
         npm run build
-      # Verify that build directory is created
+
     - name: Verify frontend build directory
       run: |
-        ls -al frontend/build
+        ls -al frontend/build # Verify the build directory exists
 
     - name: Package application
       run: |
