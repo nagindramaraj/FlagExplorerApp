@@ -2,14 +2,16 @@ name: CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [main]  # Update to 'master' if your branch is not named 'main'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -40,3 +42,9 @@ jobs:
       run: |
         cd frontend
         npm run build
+
+    - name: Package application
+      run: |
+        mkdir dist
+        cp -r backend dist/backend
+        cp -r frontend/build dist/frontend
