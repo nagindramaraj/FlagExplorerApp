@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [main]  # Update to 'master' if your branch is not named 'main'
+    branches: [main]  # Change to 'master' if your branch is named 'master'
 
 jobs:
   build:
@@ -42,6 +42,10 @@ jobs:
       run: |
         cd frontend
         npm run build
+      # Verify that build directory is created
+    - name: Verify frontend build directory
+      run: |
+        ls -al frontend/build
 
     - name: Package application
       run: |
