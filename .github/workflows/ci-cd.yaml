@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -40,3 +40,13 @@ jobs:
       run: |
         cd frontend
         npm run build
+
+    - name: Verify frontend build directory
+      run: |
+        ls -al frontend/build # Verify the build directory exists
+
+    - name: Package application
+      run: |
+        mkdir dist
+        cp -r backend dist/backend
+        cp -r frontend/build dist/frontend
